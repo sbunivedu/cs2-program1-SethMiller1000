@@ -29,7 +29,7 @@ public class Converter
 
   }// end of is Operator
 
-  pubic static int precedenceOrder ( char c )
+  public static int precedenceOrder ( char c )
   {
     if ( c == '*' || c == '/' )
     {
@@ -95,9 +95,11 @@ public class Converter
         while ( !(next == '(' ) )
         {
           System.out.print( next );
-           opstack.pop();
-           next = opstack.peek();
-        }
+          opstack.pop();
+          next = opstack.peek();
+
+        }// end of while ( !(next == '(' ) )
+
         opstack.pop();
 
       }// end of else if ( input.charAt(i) == ')' )
