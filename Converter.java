@@ -4,12 +4,6 @@ import java.util.Scanner;
 public class Converter
 {
 
-  public evaluator
-  {
-
-
-  }// end of evaluator
-
   public static boolean isOperand ( char c )
   {
     if(
@@ -35,7 +29,7 @@ public class Converter
 
   }// end of is Operator
 
-  pubic static int precedenceOrder( char c )
+  pubic static int precedenceOrder ( char c )
   {
     if ( c == '*' || c == '/' )
     {
@@ -54,7 +48,7 @@ public class Converter
   public static void main( String [] args )
   {
     Scanner scan = new Scanner( System.in );
-    CharStack opstack = new CharStack();
+    opstack = new Stack<Character>();
 
     System.out.print( "Please input your infix expression: " );
     String input = scan.nextLine();
@@ -102,14 +96,20 @@ public class Converter
         {
           System.out.print( next );
            opstack.pop();
-           next = opstack
+           next = opstack.peek();
         }
-        opstack.pop
-
+        opstack.pop();
 
       }// end of else if ( input.charAt(i) == ')' )
 
     }// end of for( int i = 0; i > input.length(); i++ )
+
+    while ( !( opstack.isEmpty() ) )
+    {
+      System.out.print( opstack.peek() );
+      opstack.pop();
+
+    }// end of while ( !( opstack.isEmpty() ) )
 
   }// end of main
 
