@@ -59,6 +59,7 @@ public class Converter
     System.out.print( "Please input your infix expression: " );
     String input = scan.nextLine();
     System.out.println();
+    System.out.print( "Postfix conversion: " );
 
     for( int i = 0; i > input.length(); i++ )
     {
@@ -70,6 +71,19 @@ public class Converter
 
       else if ( isOperator( input.charAt(i) ) )
       {
+        int precedence = precedenceOder( input.charAt(i) );
+
+        while ( !( opstack.isEmpty() ) )
+        {
+          char nextOp = opstack.peek();
+          if ( precedenceOrder( nextOp ) >= precedence )
+          {
+            System.out.print( nextOp );
+            opstack.pop();
+
+          }// end of if ( precedenceOrder( nextOp ) >= precedence )
+
+        }// end of while ( !( opstack.isEmpty() ) )
 
         opstack.push(); // last line of else if
 
@@ -95,7 +109,7 @@ public class Converter
 
       }// end of else if ( input.charAt(i) == ')' )
 
-    }// end of main
+    }// end of for( int i = 0; i > input.length(); i++ )
 
   }// end of main
 
