@@ -65,7 +65,7 @@ public class Converter
 
       else if ( isOperator( input.charAt(i) ) )
       {
-        int precedence = precedenceOder( input.charAt(i) );
+        int precedence = precedenceOrder( input.charAt(i) );
 
         while ( !( opstack.isEmpty() ) )
         {
