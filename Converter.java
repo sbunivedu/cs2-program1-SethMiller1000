@@ -48,7 +48,7 @@ public class Converter
   public static void main( String [] args )
   {
     Scanner scan = new Scanner( System.in );
-    opstack = new Stack<Character>();
+    Stack opstack = new Stack<Character>();
 
     System.out.print( "Please input your infix expression: " );
     String input = scan.nextLine();
