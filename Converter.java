@@ -48,7 +48,7 @@ public class Converter
   public static void main( String [] args )
   {
     Scanner scan = new Scanner( System.in );
-    Stack opstack = new Stack<Character>();
+    CharStack opstack = new CharStack();
 
     System.out.print( "Please input your infix expression: " );
     String input = scan.nextLine();
@@ -65,21 +65,19 @@ public class Converter
 
       else if ( isOperator( input.charAt(i) ) )
       {
-        int precedence = precedenceOrder( input.charAt(i) );
-
-        while ( !( opstack.isEmpty() ) )
+        if ( !( opstack.isEmpty() ) )
         {
+          int precedence = precedenceOrder( input.charAt(i) );
           char nextOp = opstack.peek();
-          if ( precedenceOrder( nextOp ) >= precedence )
+          while ( precedenceOrder( nextOp ) >= precedence )
           {
-            System.out.print( nextOp );
-            opstack.pop();
+            System.out.print( opstack.pop() );
 
           }// end of if ( precedenceOrder( nextOp ) >= precedence )
 
-        }// end of while ( !( opstack.isEmpty() ) )
+        }// end of if ( !( opstack.isEmpty() ) )
 
-        opstack.push(); // last line of else if
+        opstack.push( input.charAt(i) );
 
       }// end of else if ( isOperator( input.charAt(i) ) )
 
