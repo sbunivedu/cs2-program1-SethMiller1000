@@ -49,17 +49,18 @@ public class Converter
   {
     Scanner scan = new Scanner( System.in );
     CharStack opstack = new CharStack();
+    String result = "";
 
     System.out.print( "Please input your infix expression: " );
     String input = scan.nextLine();
     System.out.println();
     System.out.print( "Postfix conversion: " );
 
-    for( int i = 0; i > input.length(); i++ )
+    for( int i = 0; i < input.length(); i++ )
     {
       if ( isOperand( input.charAt(i) ) )
       {
-        System.out.print( input.charAt(i) );
+        result += input.charAt(i);
 
       }// end of if ( isOperand( input.charAt(i) ) )
 
@@ -69,9 +70,9 @@ public class Converter
         {
           int precedence = precedenceOrder( input.charAt(i) );
           char nextOp = opstack.peek();
-          while ( precedenceOrder( nextOp ) >= precedence )
+          while ( ( precedenceOrder( nextOp ) >= precedence ) && ( !(opstack.isEmpty() ) ) )
           {
-            System.out.print( opstack.pop() );
+            result += opstack.pop();
 
           }// end of if ( precedenceOrder( nextOp ) >= precedence )
 
@@ -92,9 +93,14 @@ public class Converter
         char next = opstack.peek();
         while ( !(next == '(' ) )
         {
-          System.out.print( next );
+          result += next;
           opstack.pop();
-          next = opstack.peek();
+
+          if ( !(opstack.isEmpty() ) )
+          {
+            next = opstack.peek();
+
+          }// end of if ( !(opstack.isEmpty() ) )
 
         }// end of while ( !(next == '(' ) )
 
@@ -106,10 +112,11 @@ public class Converter
 
     while ( !( opstack.isEmpty() ) )
     {
-      System.out.print( opstack.peek() );
-      opstack.pop();
+      result += opstack.pop();
 
     }// end of while ( !( opstack.isEmpty() ) )
+
+    System.out.println( result );
 
   }// end of main
 
