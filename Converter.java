@@ -63,6 +63,7 @@ public class Converter
 
       else if ( input.charAt(i) == ')' )
       {
+
         while ( ( !( opstack.isEmpty() ) ) && ( opstack.peek() != '(' ) )
         {
           System.out.print( opstack.pop() );
@@ -79,13 +80,13 @@ public class Converter
 
       }// end of if ( isOperand( input.charAt(i) ) )
 
-      else if ( isOperator( input.charAt(i) ) )
+      else
       {
-          while ( ( !(opstack.isEmpty() ) ) && ( precedenceOrder( opstack.peek() ) >= precedenceOrder( input.charAt(i) ) ) )
-          {
-            System.out.print( opstack.pop() );
+        while ( ( !(opstack.isEmpty() ) ) && ( opstack.peek() != '(' ) && ( precedenceOrder( opstack.peek() ) >= precedenceOrder( input.charAt(i) ) ) )
+        {
+          System.out.print( opstack.pop() );
 
-          }// end of while ( ( precedenceOrder( opstack.peek() ) >= precedenceOrder( input.charAt(i) ) ) && ( !(opstack.isEmpty() ) ) )
+        }// end of while ( ( precedenceOrder( opstack.peek() ) >= precedenceOrder( input.charAt(i) ) ) && ( !(opstack.isEmpty() ) ) )
 
         opstack.push( input.charAt(i) );
 
