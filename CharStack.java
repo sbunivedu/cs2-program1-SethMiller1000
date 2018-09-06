@@ -65,7 +65,7 @@ public class CharStack
 
     if ( top > -1 )
     {
-      for ( int i = top; i <= -1 ; i-- )
+      for ( int i = top; i > -1 ; i-- )
       {
         stack = stack + "" + s[i];
 

@@ -1,4 +1,3 @@
-import java.util.Stack;
 import java.util.Scanner;
 
 public class Converter
@@ -51,14 +50,33 @@ public class Converter
     CharStack opstack = new CharStack();
     String result = "";
 
-    System.out.print( "Please input your infix expression: " );
+    System.out.println( "Please input your infix expression: " );
     String input = scan.nextLine();
     System.out.println();
     System.out.print( "Postfix conversion: " );
 
     for( int i = 0; i < input.length(); i++ )
     {
-      if ( isOperand( input.charAt(i) ) )
+      if ( input.charAt(i) == '(' )
+      {
+        opstack.push( '(' );
+
+      }// end of else if ( input.charAt(i) == '(' )
+
+      else if ( input.charAt(i) == ')' )
+      {
+        char next = opstack.pop();
+
+        while ( next != '(' )
+        {
+          result += next;
+          next = opstack.pop();
+
+        }// end of while ( next != '(' )
+
+      }// end of else if ( input.charAt(i) == ')' )
+
+      else if ( isOperand( input.charAt(i) ) )
       {
         result += input.charAt(i);
 
@@ -81,32 +99,6 @@ public class Converter
         opstack.push( input.charAt(i) );
 
       }// end of else if ( isOperator( input.charAt(i) ) )
-
-      else if ( input.charAt(i) == '(' )
-      {
-        opstack.push( input.charAt(i) );
-
-      }// end of else if ( input.charAt(i) == '(' )
-
-      else if ( input.charAt(i) == ')' )
-      {
-        char next = opstack.peek();
-        while ( !(next == '(' ) )
-        {
-          result += next;
-          opstack.pop();
-
-          if ( !(opstack.isEmpty() ) )
-          {
-            next = opstack.peek();
-
-          }// end of if ( !(opstack.isEmpty() ) )
-
-        }// end of while ( !(next == '(' ) )
-
-        opstack.pop();
-
-      }// end of else if ( input.charAt(i) == ')' )
 
     }// end of for( int i = 0; i > input.length(); i++ )
 
