@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class Converter
 {
-
   public static boolean isOperand ( char c )
   {
     if(
@@ -48,9 +47,8 @@ public class Converter
   {
     Scanner scan = new Scanner( System.in );
     CharStack opstack = new CharStack();
-    String result = "";
 
-    System.out.println( "Please input your infix expression: " );
+    System.out.print( "Please input your infix expression: " );
     String input = scan.nextLine();
     System.out.println();
     System.out.print( "Postfix conversion: " );
@@ -65,36 +63,29 @@ public class Converter
 
       else if ( input.charAt(i) == ')' )
       {
-        char next = opstack.pop();
-
-        while ( next != '(' )
+        while ( ( !( opstack.isEmpty() ) ) && ( opstack.peek() != '(' ) )
         {
-          result += next;
-          next = opstack.pop();
+          System.out.print( opstack.pop() );
 
         }// end of while ( next != '(' )
+
+        opstack.pop();
 
       }// end of else if ( input.charAt(i) == ')' )
 
       else if ( isOperand( input.charAt(i) ) )
       {
-        result += input.charAt(i);
+        System.out.print( input.charAt(i) );
 
       }// end of if ( isOperand( input.charAt(i) ) )
 
       else if ( isOperator( input.charAt(i) ) )
       {
-        if ( !( opstack.isEmpty() ) )
-        {
-          int precedence = precedenceOrder( input.charAt(i) );
-          char nextOp = opstack.peek();
-          while ( ( precedenceOrder( nextOp ) >= precedence ) && ( !(opstack.isEmpty() ) ) )
+          while ( ( !(opstack.isEmpty() ) ) && ( precedenceOrder( opstack.peek() ) >= precedenceOrder( input.charAt(i) ) ) )
           {
-            result += opstack.pop();
+            System.out.print( opstack.pop() );
 
-          }// end of if ( precedenceOrder( nextOp ) >= precedence )
-
-        }// end of if ( !( opstack.isEmpty() ) )
+          }// end of while ( ( precedenceOrder( opstack.peek() ) >= precedenceOrder( input.charAt(i) ) ) && ( !(opstack.isEmpty() ) ) )
 
         opstack.push( input.charAt(i) );
 
@@ -104,11 +95,11 @@ public class Converter
 
     while ( !( opstack.isEmpty() ) )
     {
-      result += opstack.pop();
+      System.out.print( opstack.pop() );
 
     }// end of while ( !( opstack.isEmpty() ) )
 
-    System.out.println( result );
+    System.out.println();
 
   }// end of main
 
